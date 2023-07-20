@@ -4,22 +4,24 @@ export default function Title() {
     return (
         <Flex 
             margin="1rem"
+            marginRight="0rem"
             bg="black"
             border="3px solid"
-            borderColor="#9A5757"
+            borderColor="lightRed"
+            borderRadius="0.5rem"
             justifyContent="center"
         >
             <Text
                 alignSelf="center"
-                color="#FFC700"
+                color="lightYellow"
                 font-fontFamily="Epilogue"
                 fontSize="3rem"
                 fontWeight="200"
-                letterSpacing="0.5rem"
-                marginRight="-0.5rem"
-                transformOrigin=""
+                textTransform="uppercase"
+                letterSpacing="1.5rem"
+                marginRight="-1.5rem"
             >
-            C I N E P L E X E D
+            cineplexed
             </Text>
         </Flex>
     )

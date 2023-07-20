@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 
 function App() {
   return (
-    <Flex height="100vh" width="100vw" bg="#430E0E">
+    <Flex height="100vh" width="100vw" bg="darkRed">
       <Flex height="7rem" width="100vw" alignItems="center">
         <Box width="40rem">
           <Title />
