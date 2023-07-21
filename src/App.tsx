@@ -1,11 +1,19 @@
-import { Heading } from "@chakra-ui/react";
-
+import { Box, Flex } from "@chakra-ui/react";
+import Title from "./Title";
+import SearchBar from "./SearchBar";
 
 function App() {
   return (
-    <div>
-      <Heading>Cineplexed</Heading>
-    </div>
+    <Flex height="100vh" width="100vw" bg="darkRed">
+      <Flex height="7rem" width="100vw" alignItems="center">
+        <Box width="40rem">
+          <Title />
+        </Box>
+        <Box flex="1">
+          <SearchBar />
+        </Box>
+      </Flex>
+    </Flex>
   )
 }
 
