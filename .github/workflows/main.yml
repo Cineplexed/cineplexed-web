@@ -1,0 +1,43 @@
+name: CI
+
+on: 
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+  
+jobs:
+  Docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          
+      - name: setup git config
+        run: | 
+          git config user.name "Github Actions Bot"
+          git config user.email "<>"
+      - name: Dependencies
+        run: npm ci
+        
+      - name: Build
+        run: npm run build
+        
+      - name: Save version
+        id: version
+        run: echo ::set-output name=tag::$(echo $(node -p -e "require('./package.json').version"))
+      
+      - name: Increase version
+        run: npm version patch
+        
+      - name: Push new version
+        run: git push
+        
+      - name: Login to Dockerhub Registry
+      
+      - name: Build Docker Image
+        run: docker build . --file Dockerfile --tag admin/test:${{steps.version.outputs.tag}}
+        
+      - name: Push to Docker Hub
+        run: docker push admin/test:${{steps.version.outputs.tag}}
