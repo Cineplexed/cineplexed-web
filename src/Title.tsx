@@ -2,9 +2,8 @@ import { Flex, Text } from "@chakra-ui/react"
 
 export default function Title() {
     return (
-        <Flex 
+        <Flex flex="1"
             margin="1rem"
-            marginRight="0rem"
             bg="black"
             border="3px solid"
             borderColor="lightRed"
