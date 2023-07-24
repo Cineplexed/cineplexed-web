@@ -1,14 +1,14 @@
-import { Button, Flex, Spacer, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 export default function GuessHistory() {
-    const [guessHistory, setGuessHistory] = useState<JSX.Element[]>([])
+    const [guessHistory, setGuessHistory] = useState<string[]>([])
 
     useEffect(() => {
-        getPosterButttons()
+        getPosterButtons()
     }, [])
 
-    function getPosterButttons() {
+    function getPosterButtons() {
         let blankPosterList: JSX.Element[] = [];
 
         for (let i = guessHistory.length + 1; i < 11; i++) {
@@ -28,12 +28,12 @@ export default function GuessHistory() {
             blankPosterList.push(blankPoster)
         }
 
-        setGuessHistory(blankPosterList)
+        return blankPosterList
     }
     
     return (
         <Flex marginLeft="auto" marginRight="auto">
-            {guessHistory}
+            {getPosterButtons()}
         </Flex>
     )
 }
