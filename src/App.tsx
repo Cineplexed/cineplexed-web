@@ -20,6 +20,7 @@ function App() {
       </Flex>
       <Flex flex="1" alignItems="stretch" justifyContent="center">
         <GuessedMovie />
+        {/* Second GuessedMovie is a PLACEHOLDER for MysteryMovie card */}
         <GuessedMovie />
       </Flex>
     </Flex>
