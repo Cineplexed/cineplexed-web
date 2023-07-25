@@ -1,7 +1,15 @@
 import { Button, Flex, Input, Spacer } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
+import { Movie } from "./Movie-Interface";
 
-export default function SearchBar() {
+interface SearchBarProps {
+    currentGuess: Movie
+    setCurrentGuess: React.Dispatch<React.SetStateAction<Movie>>
+    guessList: Movie[]
+    setGuessList: React.Dispatch<React.SetStateAction<Movie[]>>
+}
+
+export default function SearchBar({ currentGuess, setCurrentGuess, guessList, setGuessList }: SearchBarProps) {
     const [searchInput, setSearchInput] = useState<String>("")
     
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -9,7 +17,33 @@ export default function SearchBar() {
     }
 
     function searchByInput() {
-        alert(searchInput)
+        let optionsURL: string = "http://localhost:5050/getMovieOptions?title=" + searchInput
+        fetch(optionsURL)
+        .then(response => response.json())
+        .then(data => {
+            let detailsURL: string = "http://localhost:5050/getMovieDetails?id=" + data.results[0].id
+            fetch(detailsURL)
+            .then(response => response.json())
+            .then(data => {
+                let formattedData: Movie = {
+                    title: data.title,
+                    year: data.release_date,
+                    gross: data.revenue,
+                    director: data.director,
+                    distributor: data.producer,
+                    genres: data.genres,
+                    actors: data.actors,
+                    tagline: data.tagline,
+                    plot: data.overview,
+                    poster: "https://image.tmdb.org/t/p/w185" + data.poster_path
+                }
+                setCurrentGuess(formattedData)
+
+                let tempGuessList: Movie[] = [...guessList]
+                tempGuessList.push(formattedData)
+                setGuessList(tempGuessList)
+            })
+        })
     }
     
     return (
