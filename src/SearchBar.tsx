@@ -13,7 +13,7 @@ export default function SearchBar() {
     }
     
     return (
-        <Flex margin="1rem">
+        <Flex flex="1" margin="2rem">
             <Spacer flex="0.2"></Spacer>
             <Input 
                 flex="5"
