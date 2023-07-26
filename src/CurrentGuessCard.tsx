@@ -1,5 +1,5 @@
 import { Card, CardHeader, Divider, Flex, Text } from "@chakra-ui/react";
-import { Movie } from "./Movie-Interface";
+import { ListItem, Movie } from "./Movie-Interface";
 
 interface CurrentGuessCardProps {
     currentGuess: Movie
@@ -13,30 +13,18 @@ export default function CurrentGuessCard({ currentGuess }: CurrentGuessCardProps
         return (Math.round(Number(currentGuess.gross) / 1000000) * 1000000).toLocaleString("en-US", {style:"currency", currency:"USD", maximumFractionDigits:0})
     }
     
-    function formatGenres() {
-        let tempGenres: string = ""
+    function formatList(list: ListItem[]) {
+        let tempList: string = ""
         for (let i = 0; i < 3; i++) {
-            if (currentGuess.genres[i] !== undefined) {
-                tempGenres = tempGenres.concat(currentGuess.genres[i].name)
+            if (list[i] !== undefined) {
+                tempList = tempList.concat(list[i].name)
+                console.log(list[i])
             }
-            if (currentGuess.genres[i+1] !== undefined && i + 1 < 3) {
-                tempGenres = tempGenres.concat(" • ")
+            if (list[i+1] !== undefined && i + 1 < 3) {
+                tempList = tempList.concat(" • ")
             }
         }
-        return tempGenres
-    }
-
-    function formatActors() {
-        let tempActors: string = ""
-        for (let i = 0; i < 3; i++) {
-            if (currentGuess.actors[i] !== undefined) {
-                tempActors = tempActors.concat(currentGuess.actors[i].name)
-            }
-            if (currentGuess.actors[i+1] !== undefined && i + 1 < 3) {
-                tempActors = tempActors.concat(" • ")
-            }
-        }
-        return tempActors
+        return tempList
     }
 
     return (
@@ -46,31 +34,31 @@ export default function CurrentGuessCard({ currentGuess }: CurrentGuessCardProps
             <Flex flex="1" marginY="1rem" direction="column" justifyContent="space-between" fontSize="2rem" color="white">
                 <Flex>
                     <Flex flex="1">
-                        <Text paddingRight="1rem" fontWeight="bold">Year:</Text><Text>{currentGuess.year}</Text>
-                        <Text flex="1"></Text>
+                        <Text paddingRight="1rem" fontWeight="bold">Year:</Text>
+                        <Text>{currentGuess.year}</Text>
                     </Flex>
                     <Flex flex="1">
-                        <Text paddingRight="1rem" fontWeight="bold">Gross:</Text><Text>{formatGross()}</Text>
-                        <Text flex="1"></Text>
+                        <Text paddingRight="1rem" fontWeight="bold">Gross:</Text>
+                        <Text>{formatGross()}</Text>
                     </Flex>
                 </Flex>
                 <Flex>
                     <Flex flex="1">
-                        <Text paddingRight="1rem" fontWeight="bold">Director:</Text><Text>{currentGuess.director}</Text>
-                        <Text flex="1"></Text>
+                        <Text paddingRight="1rem" fontWeight="bold">Director:</Text>
+                        <Text>{currentGuess.director}</Text>
                     </Flex>
                     <Flex flex="1">
-                        <Text paddingRight="1rem" fontWeight="bold">Distributor:</Text><Text>{currentGuess.distributor}</Text>
-                        <Text flex="1"></Text>
+                        <Text paddingRight="1rem" fontWeight="bold">Distributor:</Text>
+                        <Text>{currentGuess.distributor}</Text>
                     </Flex>
                 </Flex>
                 <Flex>
-                    <Text paddingRight="1rem" fontWeight="bold">Genres:</Text><Text>{formatGenres()}</Text>
-                    <Text flex="1"></Text>
+                    <Text paddingRight="1rem" fontWeight="bold">Genres:</Text>
+                    <Text>{formatList(currentGuess.genres)}</Text>
                 </Flex>
                 <Flex>
-                    <Text paddingRight="1rem" fontWeight="bold">Starring:</Text><Text>{formatActors()}</Text>
-                    <Text flex="1"></Text>
+                    <Text paddingRight="1rem" fontWeight="bold">Starring:</Text>
+                    <Text>{formatList(currentGuess.actors)}</Text>
                 </Flex>
             </Flex>
         </Card>

@@ -8,31 +8,25 @@ export default function MysteryMovie() {
             <Flex flex="1" marginY="1rem" direction="column" justifyContent="space-between" fontSize="2rem" color="white">
                 <Flex>
                     <Flex flex="1">
-                        <Text paddingRight="1rem" fontWeight="bold">Year:</Text><Text></Text>
-                        <Text flex="1"></Text>
+                        <Text paddingRight="1rem" fontWeight="bold">Year:</Text>
                     </Flex>
                     <Flex flex="1">
-                        <Text paddingRight="1rem" fontWeight="bold">Gross:</Text><Text></Text>
-                        <Text flex="1"></Text>
+                        <Text paddingRight="1rem" fontWeight="bold">Gross:</Text>
                     </Flex>
                 </Flex>
                 <Flex>
                     <Flex flex="1">
-                        <Text paddingRight="1rem" fontWeight="bold">Director:</Text><Text></Text>
-                        <Text flex="1"></Text>
+                        <Text paddingRight="1rem" fontWeight="bold">Director:</Text>
                     </Flex>
                     <Flex flex="1">
-                        <Text paddingRight="1rem" fontWeight="bold">Distributor:</Text><Text></Text>
-                        <Text flex="1"></Text>
+                        <Text paddingRight="1rem" fontWeight="bold">Distributor:</Text>
                     </Flex>
                 </Flex>
                 <Flex>
-                    <Text paddingRight="1rem" fontWeight="bold">Genres:</Text><Text></Text>
-                    <Text flex="1"></Text>
+                    <Text paddingRight="1rem" fontWeight="bold">Genres:</Text>
                 </Flex>
                 <Flex>
-                    <Text paddingRight="1rem" fontWeight="bold">Starring:</Text><Text></Text>
-                    <Text flex="1"></Text>
+                    <Text paddingRight="1rem" fontWeight="bold">Starring:</Text>
                 </Flex>
             </Flex>
         </Card>

@@ -4,17 +4,13 @@ export interface Movie {
     gross: string;
     director: String;
     distributor: String;
-    genres: Genre[];
-    actors: Actor[];
+    genres: ListItem[];
+    actors: ListItem[];
     tagline: String;
     plot: String;
     poster: string;
 }
 
-interface Genre {
-    name: string;
-}
-
-interface Actor {
+export interface ListItem {
     name: string;
 }

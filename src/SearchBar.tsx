@@ -57,7 +57,6 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
     
     return (
         <Flex flex="1" margin="2rem">
-            <Spacer flex="0.2"></Spacer>
             <Input 
                 flex="5"
                 bg="white"
@@ -76,11 +75,10 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
             borderColor="lightRed"
             _hover={{borderColor:"white"}}
             _active={{bg:"yellow.500"}}
-            onClick={() => searchByInput()}
+            onClick={searchByInput}
             >
                 Guess
-            </Button>
-            <Spacer flex="0.2"></Spacer>            
+            </Button>           
         </Flex>
     )
 }
