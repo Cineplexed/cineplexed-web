@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Spacer } from "@chakra-ui/react";
+import { Button, Flex, Input, Spacer, useToast } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import { Movie } from "./Movie-Interface";
 
@@ -11,6 +11,7 @@ interface SearchBarProps {
 
 export default function SearchBar({ currentGuess, setCurrentGuess, guessList, setGuessList }: SearchBarProps) {
     const [searchInput, setSearchInput] = useState<String>("")
+    const toast = useToast()
     
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchInput(e.target.value)
@@ -21,6 +22,14 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
         fetch(optionsURL)
         .then(response => response.json())
         .then(data => {
+            if (data.results.length === 0) {
+                toast({
+                    title: "Movie not found",
+                    status: "error",
+                    position: "top-right"
+                })
+                return
+            }
             let detailsURL: string = "http://localhost:5050/getMovieDetails?id=" + data.results[0].id
             fetch(detailsURL)
             .then(response => response.json())
@@ -38,7 +47,7 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
                     poster: "https://image.tmdb.org/t/p/w185" + data.poster_path
                 }
                 setCurrentGuess(formattedData)
-
+    
                 let tempGuessList: Movie[] = [...guessList]
                 tempGuessList.push(formattedData)
                 setGuessList(tempGuessList)
