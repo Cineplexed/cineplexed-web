@@ -13,7 +13,6 @@ export default function Title() {
             <Text
                 alignSelf="center"
                 color="lightYellow"
-                font-fontFamily="Epilogue"
                 fontSize="3rem"
                 fontWeight="200"
                 textTransform="uppercase"

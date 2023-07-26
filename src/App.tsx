@@ -1,8 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import Title from "./Title";
-import SearchBar from "./SearchBar";
-import GuessHistory from "./GuessHistory";
-import GuessedMovie from "./GuessedMovie";
+import Game from "./Game";
 
 function App() {
 
@@ -12,20 +10,10 @@ function App() {
         <Flex flex="1" height="7rem" alignItems="center">
           <Title />
         </Flex>
-        <Flex flex="1" alignItems="center">
-          <SearchBar />
-        </Flex>
       </Flex>
 
-      <Flex overflowX="auto" borderY="0.5rem solid black" bg="darkGrey" height="15rem">
-        <GuessHistory />
-      </Flex>
-
-      <Flex display={{ xl: 'flex'}} flex="1" alignItems="stretch" justifyContent="center" maxHeight="50rem">
-        <GuessedMovie />
-        {/* Second GuessedMovie is a PLACEHOLDER for MysteryMovie card */}
-        <GuessedMovie />
-      </Flex>
+      <Game />
+      
     </Flex>
   )
 }
