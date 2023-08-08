@@ -1,14 +1,21 @@
 export interface Movie {
+    id: number
     title: string;
-    year: String;
+    year: string;
     gross: string;
-    director: String;
-    distributor: String;
+    director: string;
+    distributor: string;
     genres: ListItem[];
     actors: ListItem[];
-    tagline: String;
-    plot: String;
+    tagline: string;
+    plot: string;
     poster: string;
+}
+
+export interface MovieBite {
+    id: number
+    title: string
+    year: string
 }
 
 export interface ListItem {

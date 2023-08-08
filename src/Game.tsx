@@ -7,7 +7,8 @@ import { Movie } from "./Movie-Interface";
 import MysteryMovie from "./MysteryMovie";
 
 export default function Game() {
-    const [currentGuess, setCurrentGuess] = useState<Movie>({title: "Guessed Movie", year: "", gross: "", director: "", distributor: "", genres: [], actors: [], tagline: "", plot: "", poster: "",})
+    const initialGuess: Movie = {id: NaN, title: "Guessed Movie", year: "", gross: "", director: "", distributor: "", genres: [], actors: [], tagline: "", plot: "", poster: "",}
+    const [currentGuess, setCurrentGuess] = useState<Movie>(initialGuess)
     const [guessList, setGuessList] = useState<Movie[]>([])
 
     return (

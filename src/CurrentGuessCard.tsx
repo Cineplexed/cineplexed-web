@@ -18,7 +18,6 @@ export default function CurrentGuessCard({ currentGuess }: CurrentGuessCardProps
         for (let i = 0; i < 3; i++) {
             if (list[i] !== undefined) {
                 tempList = tempList.concat(list[i].name)
-                console.log(list[i])
             }
             if (list[i+1] !== undefined && i + 1 < 3) {
                 tempList = tempList.concat(" • ")

@@ -44,6 +44,7 @@ export default function GuessHistory({ currentGuess, setCurrentGuess, guessList 
         <Flex marginLeft="auto" marginRight="auto">
             {guessList.map(guess => (
                 <Button
+                key={guess.id}
                 backgroundImage={`url(${guess.poster})`}
                 backgroundPosition="center"
                 backgroundSize="cover"
