@@ -12,12 +12,13 @@ interface SearchBarProps {
 
 export default function SearchBar({ currentGuess, setCurrentGuess, guessList, setGuessList }: SearchBarProps) {
     const [searchOptions, setSearchOptions] = useState<MovieBite[]>([])
-    const [selectedMovie, setSelectedMovie] = useState<MovieBite>({id: NaN, title: "", year: ""})
+    const initialSelectedMovie: MovieBite = {id: NaN, title: "", year: ""}
+    const [selectedMovie, setSelectedMovie] = useState<MovieBite>(initialSelectedMovie)
     const toast = useToast()
 
     const handleInputChange = (input: string) => {
         if (input === "") {
-            setSelectedMovie({id: NaN, title: "", year: ""})
+            setSelectedMovie(initialSelectedMovie)
             return
         }
         let optionsURL: string = "http://localhost:5050/getMovieOptions?title=" + input
@@ -25,7 +26,7 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
         .then(response => response.json())
         .then(data => {
             if (data.results.length === 0) {
-                setSelectedMovie({id: NaN, title: "", year: ""})
+                setSelectedMovie(initialSelectedMovie)
                 return
             }
             let formattedData: MovieBite[] = []
