@@ -15,13 +15,14 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
     const initialSelectedMovie: MovieBite = {id: NaN, title: "", year: ""}
     const [selectedMovie, setSelectedMovie] = useState<MovieBite>(initialSelectedMovie)
     const toast = useToast()
+    const URL: string = "http://lp047sxove.execute-api.us-east-1.amazonaws.com/Production"
 
     const handleInputChange = (input: string) => {
         if (input === "") {
             setSelectedMovie(initialSelectedMovie)
             return
         }
-        let optionsURL: string = "http://localhost:5050/getMovieOptions?title=" + input
+        let optionsURL: string = URL + "/getMovieOptions?name=" + input + "&key=" + process.env.apiKey
         fetch(optionsURL)
         .then(response => response.json())
         .then(data => {
@@ -70,7 +71,7 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
             return
         }
 
-        let detailsURL: string = "http://localhost:5050/getMovieDetails?id=" + selectedMovie.id
+        let detailsURL: string = URL + "/getMovieDetails?id=" + selectedMovie.id + "&key=" + process.env.apiKey
         fetch(detailsURL)
             .then(response => response.json())
             .then(data => {
