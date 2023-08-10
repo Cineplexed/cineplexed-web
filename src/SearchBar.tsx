@@ -15,13 +15,15 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
     const initialSelectedMovie: MovieBite = {id: NaN, title: "", year: ""}
     const [selectedMovie, setSelectedMovie] = useState<MovieBite>(initialSelectedMovie)
     const toast = useToast()
+    const URL: string | undefined = process.env.REACT_APP_APIURL
+    const apiKey: string | undefined = process.env.REACT_APP_APIKEY
 
     const handleInputChange = (input: string) => {
         if (input === "") {
             setSelectedMovie(initialSelectedMovie)
             return
         }
-        let optionsURL: string = "http://localhost:5050/getMovieOptions?title=" + input
+        let optionsURL: string = URL + "/getMovieOptions?name=" + input + "&key=" + apiKey
         fetch(optionsURL)
         .then(response => response.json())
         .then(data => {
@@ -70,22 +72,22 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
             return
         }
 
-        let detailsURL: string = "http://localhost:5050/getMovieDetails?id=" + selectedMovie.id
+        let detailsURL: string = URL + "/getMovieDetails?id=" + selectedMovie.id + "&key=" + apiKey
         fetch(detailsURL)
             .then(response => response.json())
             .then(data => {
                 let formattedData: Movie = {
                     id: selectedMovie.id,
-                    title: data.title,
-                    year: data.release_date,
-                    gross: data.revenue,
-                    director: data.director,
-                    distributor: data.producer,
-                    genres: data.genres,
-                    actors: data.actors,
-                    tagline: data.tagline,
-                    plot: data.overview,
-                    poster: "https://image.tmdb.org/t/p/w185" + data.poster_path
+                    title: data.GuessedMovie.title,
+                    year: data.GuessedMovie.release_date,
+                    gross: data.GuessedMovie.revenue,
+                    director: data.GuessedMovie.director,
+                    distributor: data.GuessedMovie.distributor,
+                    genres: data.GuessedMovie.genres,
+                    actors: data.GuessedMovie.actors,
+                    tagline: data.GuessedMovie.tagline,
+                    plot: data.GuessedMovie.overview,
+                    poster: "https://image.tmdb.org/t/p/w185" + data.GuessedMovie.poster_path
                 }
                 setCurrentGuess(formattedData)
                 let tempGuessList: Movie[] = [...guessList]
