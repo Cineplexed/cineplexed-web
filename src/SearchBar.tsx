@@ -76,7 +76,6 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
         fetch(detailsURL)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 let formattedData: Movie = {
                     id: selectedMovie.id,
                     title: data.GuessedMovie.title,
