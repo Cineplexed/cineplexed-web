@@ -6,13 +6,14 @@ function App() {
 
   return (
     <Flex flexDirection="column" height="100vh" bg="darkRed">
-      <Flex display={{ xl: 'flex'}} width="100vw" alignItems="center" justifyContent="center">
-        <Flex flex="1" height="7rem" alignItems="center">
+
+      <Flex width="100%" height="10%" marginY="1rem" alignItems="center" justifyContent="center">
           <Title />
-        </Flex>
       </Flex>
 
-      <Game />
+      <Flex width="100%" height="90%" alignItems="baseline" justifyContent="center">
+        <Game />
+      </Flex>
       
     </Flex>
   )

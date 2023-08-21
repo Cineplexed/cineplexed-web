@@ -13,19 +13,17 @@ export default function Game() {
 
     return (
       <div>
-        <Flex>
-            <Flex flex="1" alignItems="center">
-            <SearchBar currentGuess={currentGuess} setCurrentGuess={setCurrentGuess} guessList={guessList} setGuessList={setGuessList}/>
-            </Flex>
+        <Flex width="100vw" flex="1" alignItems="center">
+          <SearchBar currentGuess={currentGuess} setCurrentGuess={setCurrentGuess} guessList={guessList} setGuessList={setGuessList}/>
         </Flex>
 
-        <Flex overflowX="auto" borderY="0.5rem solid black" bg="darkGrey" height="15rem">
-            <GuessHistory currentGuess={currentGuess} setCurrentGuess={setCurrentGuess} guessList={guessList} />
+        <Flex overflowX="auto" borderY="0.5rem solid black" bg="darkGrey" height="11rem">
+          <GuessHistory currentGuess={currentGuess} setCurrentGuess={setCurrentGuess} guessList={guessList} />
         </Flex>
 
-        <Flex display={{ xl: 'flex'}} flex="1" alignItems="stretch" justifyContent="center" height="28rem">
-            <CurrentGuessCard currentGuess={currentGuess}/>
-            <MysteryMovie/>
+        <Flex display={{ xl: 'flex'}} flex="1" alignItems="stretch" justifyContent="center" height="60%">
+          <CurrentGuessCard currentGuess={currentGuess}/>
+          <MysteryMovie/>
         </Flex>
       </div>
     )

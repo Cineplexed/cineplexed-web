@@ -30,7 +30,7 @@ export default function CurrentGuessCard({ currentGuess }: CurrentGuessCardProps
         <Card flex="1" margin="2rem" paddingX="1rem" bg="darkGrey" border="5px solid" borderColor="lightRed">
             <CardHeader margin="-1rem" textAlign="center" fontSize="2rem" fontWeight="bold" color="white">{currentGuess.title}</CardHeader>
             <Divider />
-            <Flex flex="1" marginY="1rem" direction="column" justifyContent="space-between" fontSize="2rem" color="white">
+            <Flex flex="1" marginY="1rem" direction="column" justifyContent="space-between" fontSize="1rem" color="white">
                 <Flex>
                     <Flex flex="1">
                         <Text paddingRight="1rem" fontWeight="bold">Year:</Text>

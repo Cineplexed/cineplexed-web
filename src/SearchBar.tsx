@@ -103,7 +103,7 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
     }
 
     return (
-        <Flex flex="1" margin="2rem" alignItems="start">
+        <Flex flex="1" margin="1rem" marginTop="0rem" alignItems="start">
             <Box flex="5" color="red" onKeyDown={enterListener}>
                 <ReactSearchAutocomplete<MovieBite>  
                 items={searchOptions}
