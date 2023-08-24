@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Spacer, useToast } from "@chakra-ui/react";
 import { useState } from "react";
-import { Movie, MovieBite } from "./Movie-Interface";
+import { Movie, MovieBite, Comparison, ListItem } from "./Movie-Interface";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 interface SearchBarProps {
@@ -8,9 +8,11 @@ interface SearchBarProps {
     setCurrentGuess: React.Dispatch<React.SetStateAction<Movie>>
     guessList: Movie[]
     setGuessList: React.Dispatch<React.SetStateAction<Movie[]>>
+    comparison: Comparison
+    setComparison: React.Dispatch<React.SetStateAction<Comparison>>
 }
 
-export default function SearchBar({ currentGuess, setCurrentGuess, guessList, setGuessList }: SearchBarProps) {
+export default function SearchBar({ currentGuess, setCurrentGuess, guessList, setGuessList, comparison, setComparison }: SearchBarProps) {
     const [searchOptions, setSearchOptions] = useState<MovieBite[]>([])
     const initialSelectedMovie: MovieBite = {id: NaN, title: "", year: ""}
     const [selectedMovie, setSelectedMovie] = useState<MovieBite>(initialSelectedMovie)
@@ -68,7 +70,7 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
             return
         }
 
-        if (guessList.some((guess) => {return (guess.id === selectedMovie.id)})) {
+        if (guessList.length >= 10 || guessList.some((guess) => {return (guess.id === selectedMovie.id)})) {
             return
         }
 
@@ -76,7 +78,7 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
         fetch(detailsURL)
             .then(response => response.json())
             .then(data => {
-                let formattedData: Movie = {
+                let formattedGuessData: Movie = {
                     id: selectedMovie.id,
                     title: data.GuessedMovie.title,
                     year: data.GuessedMovie.release_date,
@@ -89,11 +91,94 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
                     plot: data.GuessedMovie.overview,
                     poster: "https://image.tmdb.org/t/p/w185" + data.GuessedMovie.poster_path
                 }
-                setCurrentGuess(formattedData)
+                updateComparison(formattedGuessData, data.Comparison)
+                setCurrentGuess(formattedGuessData)
                 let tempGuessList: Movie[] = [...guessList]
-                tempGuessList.push(formattedData)
+                tempGuessList.push(formattedGuessData)
                 setGuessList(tempGuessList)
             })
+    }
+
+    function updateComparison(newMovie: any, newMovieComparison: any) {
+        let updatedCorrect: boolean = newMovieComparison.correct
+
+        let updatedDirector: string = comparison.directorComparison
+        let updatedDistributor: string = comparison.distributorComparison
+
+        if (newMovieComparison.directorComparison) {
+            updatedDirector = newMovie.director
+        }
+
+        if (newMovieComparison.distributorComparison) {
+            updatedDistributor = newMovie.distributor
+        }
+
+        let updatedGenres: ListItem[] = [...comparison.genres]
+        newMovieComparison.genres.forEach((genre: ListItem) => {
+            if (!updatedGenres.some((existingGenre) => {return (existingGenre.name === genre.name)})) {
+                updatedGenres.push(genre)
+            }
+        });
+
+        let updatedActors: ListItem[] = [...comparison.actors]
+        newMovieComparison.actors.forEach((actor: ListItem) => {
+            if (!updatedActors.some((existingActor) => {return (existingActor.name === actor.name)})) {
+                updatedActors.push(actor)
+            }
+        });
+
+        let updatedYearLessThan: number = NaN
+        let updatedYearGreaterThan: number = NaN
+        let updatedRevenueLessThan: number = NaN
+        let updatedRevenueGreaterThan: number = NaN
+        
+        if (newMovieComparison.yearComparison < 0 && (newMovie.year > comparison.yearLessThan || Number.isNaN(comparison.yearLessThan))) {
+            updatedYearLessThan = newMovie.year
+        } else {
+            updatedYearLessThan = comparison.yearLessThan
+        }
+
+        if (newMovieComparison.yearComparison > 0 && (newMovie.year < comparison.yearGreaterThan || Number.isNaN(comparison.yearGreaterThan))) {
+            updatedYearGreaterThan = newMovie.year
+        } else {
+            updatedYearGreaterThan = comparison.yearGreaterThan
+        }
+
+        if (newMovieComparison.yearComparison === 0) {
+            updatedYearGreaterThan = newMovie.year
+            updatedYearLessThan = newMovie.year
+        }
+
+        if (newMovieComparison.revenueComparison < 0 && (newMovie.gross > comparison.revenueLessThan || Number.isNaN(comparison.revenueLessThan))) {
+            updatedRevenueLessThan = newMovie.gross
+        } else {
+            updatedRevenueLessThan = comparison.revenueLessThan
+        }
+
+        if (newMovieComparison.revenueComparison > 0 && (newMovie.gross < comparison.revenueGreaterThan || Number.isNaN(comparison.revenueGreaterThan))) {
+            updatedRevenueGreaterThan = newMovie.gross
+        } else {
+            updatedRevenueGreaterThan = comparison.revenueGreaterThan
+        }
+
+        if (newMovieComparison.revenueComparison === 0) {
+            updatedRevenueGreaterThan = newMovie.gross
+            updatedRevenueLessThan = newMovie.gross
+        }
+
+        let updatedComparison: Comparison = {
+            correct: updatedCorrect,
+            yearLessThan: updatedYearLessThan,
+            yearGreaterThan: updatedYearGreaterThan,
+            revenueLessThan: updatedRevenueLessThan,
+            revenueGreaterThan: updatedRevenueGreaterThan,
+            directorComparison: updatedDirector,
+            distributorComparison: updatedDistributor,
+            genres: updatedGenres,
+            actors: updatedActors
+        }
+
+        setComparison(updatedComparison)
     }
 
     function enterListener(event: React.KeyboardEvent<HTMLDivElement>) {
