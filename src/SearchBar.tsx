@@ -70,7 +70,7 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
             return
         }
 
-        if (guessList.length >= 10 || guessList.some((guess) => {return (guess.id === selectedMovie.id)})) {
+        if (guessList.length >= 10 || guessList.some((guess) => {return (guess.id === selectedMovie.id)}) || comparison.correct) {
             return
         }
 
@@ -188,7 +188,7 @@ export default function SearchBar({ currentGuess, setCurrentGuess, guessList, se
     }
 
     return (
-        <Flex flex="1" margin="1rem" marginTop="0rem" alignItems="start">
+        <Flex width="80%" margin="1rem" marginTop="0rem" alignItems="start">
             <Box flex="5" color="red" onKeyDown={enterListener}>
                 <ReactSearchAutocomplete<MovieBite>  
                 items={searchOptions}

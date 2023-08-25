@@ -8,7 +8,6 @@ const theme = extendTheme({
   semanticTokens: {
     colors: {
       darkRed: "#430E0E",
-      lightRed: "black",
       darkPink: "#FFBEBE",
       lightPink: "#FFE2E2",
       lightYellow: "#FFC700",

@@ -18,8 +18,8 @@ export default function Game() {
     const [finishedGame, setFinishedGame] = useState<finishedGame>(initialFinishedGame)
 
     return (
-      <div>
-        <Flex width="100vw" flex="1" alignItems="center">
+      <>
+        <Flex width="100%" alignItems="center" justifyContent="center">
           <SearchBar currentGuess={currentGuess} setCurrentGuess={setCurrentGuess} guessList={guessList} setGuessList={setGuessList} comparison={comparison} setComparison={setComparison}/>
         </Flex>
 
@@ -27,12 +27,12 @@ export default function Game() {
           <GuessHistory currentGuess={currentGuess} setCurrentGuess={setCurrentGuess} guessList={guessList}/>
         </Flex>
 
-        <Flex display={{ xl: 'flex'}} flex="1" alignItems="stretch" justifyContent="center" height="60%">
+        <Flex display={{ xl: 'flex'}} alignItems="stretch" justifyContent="center">
           <CurrentGuessCard currentGuess={currentGuess}/>
-          <HintButtons />
+          <HintButtons guessList={guessList}/>
           <MysteryMovieCard comparison={comparison} finishedGame={finishedGame}/>
         </Flex>
         <WinOverlay finishedGame={finishedGame} setFinishedGame={setFinishedGame} comparison={comparison} guessList={guessList}/>
-      </div>
+      </>
     )
 }
