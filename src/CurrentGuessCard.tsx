@@ -27,37 +27,37 @@ export default function CurrentGuessCard({ currentGuess }: CurrentGuessCardProps
     }
 
     return (
-        <Card flex="1" margin="2rem" paddingX="1rem" bg="darkGrey" border="5px solid" borderColor="lightRed">
-            <CardHeader margin="-1rem" textAlign="center" fontSize="2rem" fontWeight="bold" color="white">{currentGuess.title}</CardHeader>
+        <Card flex="1" margin="2rem" paddingX="1rem" bg="darkGrey" border="5px solid" borderColor="black">
+            <CardHeader margin="-1rem" textAlign="center" fontSize="2rem" fontWeight="bold" color="white"><Text>{currentGuess.title}</Text></CardHeader>
             <Divider />
-            <Flex flex="1" marginY="1rem" direction="column" justifyContent="space-between" fontSize="2rem" color="white">
-                <Flex>
-                    <Flex flex="1">
+            <Flex flex="1" marginY="1rem" direction="column" justifyContent="space-between" fontSize="1rem" color="white">
+                <Flex flexWrap="wrap">
+                    <Flex padding="0.2rem" flex="1">
                         <Text paddingRight="1rem" fontWeight="bold">Year:</Text>
                         <Text>{currentGuess.year}</Text>
                     </Flex>
-                    <Flex flex="1">
+                    <Flex padding="0.2rem" flex="1">
                         <Text paddingRight="1rem" fontWeight="bold">Gross:</Text>
                         <Text>{formatGross()}</Text>
                     </Flex>
                 </Flex>
-                <Flex>
-                    <Flex flex="1">
+                <Flex flexWrap="wrap">
+                    <Flex padding="0.2rem" flex="1">
                         <Text paddingRight="1rem" fontWeight="bold">Director:</Text>
-                        <Text>{currentGuess.director}</Text>
+                        <Text flexWrap="wrap">{currentGuess.director}</Text>
                     </Flex>
-                    <Flex flex="1">
+                    <Flex padding="0.2rem" flex="1">
                         <Text paddingRight="1rem" fontWeight="bold">Distributor:</Text>
-                        <Text>{currentGuess.distributor}</Text>
+                        <Text flexWrap="wrap">{currentGuess.distributor}</Text>
                     </Flex>
                 </Flex>
-                <Flex>
+                <Flex padding="0.2rem">
                     <Text paddingRight="1rem" fontWeight="bold">Genres:</Text>
-                    <Text>{formatList(currentGuess.genres)}</Text>
+                    <Text flexWrap="wrap">{formatList(currentGuess.genres)}</Text>
                 </Flex>
-                <Flex>
+                <Flex padding="0.2rem">
                     <Text paddingRight="1rem" fontWeight="bold">Starring:</Text>
-                    <Text>{formatList(currentGuess.actors)}</Text>
+                    <Text flexWrap="wrap">{formatList(currentGuess.actors)}</Text>
                 </Flex>
             </Flex>
         </Card>
