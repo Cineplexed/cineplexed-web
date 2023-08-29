@@ -95,13 +95,13 @@ export default function MysteryMovie({ comparison, finishedGame }: MysteryMovieC
             toReturn.pop()
     
             return (
-                <Flex flexWrap="wrap">
+                <Flex flexWrap="wrap" alignItems="center">
                     {toReturn}
                 </Flex>
             )
         } else {
             return (
-                <Flex flexWrap="wrap">
+                <Flex flexWrap="wrap" alignItems="center">
                     <Skeleton height="1rem" width="6rem"/><Text marginX="0.5rem">{"•"}</Text><Skeleton height="1rem" width="6rem"/><Text marginX="0.5rem">{"•"}</Text><Skeleton height="1rem" width="6rem"/>
                 </Flex>
             )

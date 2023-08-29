@@ -83,7 +83,7 @@ export default function WinOverlay({ finishedGame, setFinishedGame, comparison, 
                             <Text color="white" fontSize="3rem" fontWeight="bold" textAlign="center">{finishedGame.movie}</Text>
                             <Text color="white" fontSize="2.5rem" textAlign="center">{finishedGame.releaseYear} • {finishedGame.revenue.toLocaleString("en-US", {style:"currency", currency:"USD", maximumFractionDigits:0})}</Text>
                             <Text color="white" fontSize="2rem" textAlign="center">Dir. {finishedGame.director} • {finishedGame.producer}</Text>
-                            <Text color="white" fontSize="1.5rem" textAlign="center">{finishedGame.genres[0]} • {finishedGame.genres[1]} • {finishedGame.genres[2]} • {finishedGame.genres[3]} • {finishedGame.genres[4]}</Text>
+                            <Text color="white" fontSize="1.5rem" textAlign="center">{finishedGame.genres[0]} • {finishedGame.genres[1]} • {finishedGame.genres[2]}</Text>
                             <Text color="white" fontSize="1rem" textAlign="center">{finishedGame.actors[0]} • {finishedGame.actors[1]} • {finishedGame.actors[2]} • {finishedGame.actors[3]} • {finishedGame.actors[4]} • {finishedGame.actors[5]} • {finishedGame.actors[6]}</Text>
                         </Flex>
                     </Flex>
